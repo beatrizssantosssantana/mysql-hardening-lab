@@ -1,6 +1,4 @@
 # Hardening de MySQL com Kali Linux e Nmap
-
-<br>
 <br>
 
 ## Sobre o projeto
@@ -11,9 +9,7 @@ Durante o reconhecimento, identifiquei a porta `3306/tcp` acessível pela rede. 
 
 
 > Laboratório realizado em ambiente próprio e controlado.
-
-
-
+<br>
 
 ## Ambiente
 
@@ -22,8 +18,7 @@ Durante o reconhecimento, identifiquei a porta `3306/tcp` acessível pela rede. 
 - MySQL Server 8.0
 - Nmap
 - Netstat
-
-
+<br>
 
 ## Identificação da rede
 
@@ -33,9 +28,8 @@ Antes de iniciar o reconhecimento, verifiquei o endereço IP da máquina Kali:
 ip a
 ```
 
-
 ![IP da máquina Kali](images/01-kali-ip.png)
-
+<br>
 
 Em seguida, consultei a tabela de roteamento para identificar a rota padrão e o gateway utilizado pela máquina virtual:
 
@@ -43,8 +37,8 @@ Em seguida, consultei a tabela de roteamento para identificar a rota padrão e o
 ip route
 ```
 
-
 ![Tabela de roteamento do Kali](images/02-kali-route.png)
+<br>
 
 
 Para validar a comunicação entre o Kali Linux e a máquina Windows, realizei um teste de conectividade utilizando o `ping`:
@@ -53,10 +47,8 @@ Para validar a comunicação entre o Kali Linux e a máquina Windows, realizei u
 ping -c 4 192.168.1.8
 ```
 
-
 ![Ping do Kali para o Windows](images/03-ping-windows.png)
-
-
+<br>
 
 ## Reconhecimento
 
@@ -65,12 +57,13 @@ Com a conectividade validada, realizei um scan no host Windows para identificar 
 ```cmd
 nmap 192.168.1.8
 ```
-
+<br>
 
 
 O scan identificou algumas portas abertas, entre elas a porta `3306/tcp`, normalmente associada ao MySQL.
 
 ![Scan inicial com Nmap](images/04-nmap-inicial.png)
+<br>
 
 
 Em seguida, utilizei a detecção de serviço especificamente na porta 3306:
@@ -78,7 +71,7 @@ Em seguida, utilizei a detecção de serviço especificamente na porta 3306:
 ```cmd
 nmap -sV -p 3306 192.168.1.8
 ```
-
+<br>
 
 **Resultado**:
 
@@ -86,9 +79,8 @@ nmap -sV -p 3306 192.168.1.8
 3306/tcp open mysql MySQL (unauthorized)
 ```
 
-
 ![Identificação do MySQL com Nmap](images/05-nmap-mysql-antes.png)
-
+<br>
 
 
 ## Validação no Windows
@@ -104,16 +96,18 @@ O resultado mostrou o MySQL escutando em:
 ```text
 0.0.0.0:3306
 ```
+<br>
 
 Isso indicava que o serviço estava escutando nas interfaces IPv4 disponíveis da máquina.
 
 ![Netstat antes do hardening](images/06-netstat-antes.png)
-
+<br>
 
 
 ## Hardening
 
 Como o MySQL era utilizado apenas localmente, alterei o arquivo `my.ini` para restringir o serviço ao endereço de loopback.
+<br>
 
 Na seção `[mysqld]`, adicionei:
 
@@ -121,13 +115,10 @@ Na seção `[mysqld]`, adicionei:
 bind-address = 127.0.0.1
 ```
 
-
-
 ![Configuração bind-address](images/07-bind-address.png)
 
-
 Após salvar a configuração, reiniciei o serviço MySQL para aplicar a alteração.
-
+<br>
 
 
 ## Validação após o hardening
@@ -138,26 +129,21 @@ Após a alteração, executei novamente:
 netstat -ano | findstr :3306
 ```
 
-
-
 Dessa vez, o MySQL passou a escutar em:
 
 ```text
 127.0.0.1:3306
 ```
 
-
-
 ![Netstat depois do hardening](images/08-netstat-depois.png)
-
+<br>
 
 Por fim, repeti o scan a partir do Kali:
 
 ```cmd
 nmap -sV -p 3306 192.168.1.8
 ```
-
-
+<br>
 
 **Resultado**:
 
@@ -165,11 +151,8 @@ nmap -sV -p 3306 192.168.1.8
 3306/tcp filtered mysql
 ```
 
-
-
 ![Nmap depois do hardening](images/09-nmap-depois.png)
-
-
+<br>
 
 ## Antes e depois
 
@@ -178,8 +161,7 @@ nmap -sV -p 3306 192.168.1.8
 | `0.0.0.0:3306` | `127.0.0.1:3306` |
 | Nmap: `open` | Nmap: `filtered` |
 | Serviço acessível pela rede | Serviço restrito ao acesso local |
-
-
+<br>
 
 ## Aprendizados
 
