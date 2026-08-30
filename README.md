@@ -1,7 +1,7 @@
 # *Hardening de MySQL com Kali Linux e Nmap*
 <br>
 
-## Sobre o projeto
+## 🧪 Sobre o projeto
 
 Neste laboratório, analisei a exposição de um serviço MySQL executado em uma máquina Windows utilizando Kali Linux e Nmap.
 
@@ -163,7 +163,7 @@ nmap -sV -p 3306 192.168.1.8
 
 <br>
 
-## 🔄 Antes e depois
+## Antes e depois
 
 | Antes | Depois |
 |---|---|
