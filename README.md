@@ -124,6 +124,7 @@ bind-address = 127.0.0.1
 ![Configuração bind-address](images/07-bind-address.png)
 
 Após salvar a configuração, reiniciei o serviço MySQL para aplicar a alteração.
+
 <br>
 
 
