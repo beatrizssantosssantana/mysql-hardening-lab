@@ -1,4 +1,4 @@
-# *Hardening de MySQL com Kali Linux e Nmap*
+# Hardening de MySQL com Kali Linux e Nmap
 <br>
 
 ## 🧪 Sobre o projeto
