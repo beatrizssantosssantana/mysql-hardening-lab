@@ -1,4 +1,4 @@
-# 🛡️ Hardening de MySQL com Kali Linux e Nmap
+# 🛡 Hardening de MySQL com Kali Linux e Nmap
 <br>
 
 ## Sobre o projeto
@@ -163,7 +163,7 @@ nmap -sV -p 3306 192.168.1.8
 
 <br>
 
-## Antes e depois
+## 🔄 Antes e depois
 
 | Antes | Depois |
 |---|---|
@@ -173,6 +173,6 @@ nmap -sV -p 3306 192.168.1.8
 
 <br>
 
-## 🌐 Aprendizados
+## 💡 Aprendizados
 
 O laboratório permitiu praticar conceitos de redes, conectividade entre máquinas, reconhecimento com Nmap, análise de portas e serviços, validação com Netstat e aplicação de hardening para redução da superfície de exposição.
