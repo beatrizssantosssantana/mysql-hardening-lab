@@ -29,6 +29,7 @@ ip a
 ```
 
 ![IP da máquina Kali](images/01-kali-ip.png)
+
 <br>
 
 Em seguida, consultei a tabela de roteamento para identificar a rota padrão e o gateway utilizado pela máquina virtual:
@@ -38,6 +39,7 @@ ip route
 ```
 
 ![Tabela de roteamento do Kali](images/02-kali-route.png)
+
 <br>
 
 
@@ -48,6 +50,7 @@ ping -c 4 192.168.1.8
 ```
 
 ![Ping do Kali para o Windows](images/03-ping-windows.png)
+
 <br>
 
 ## Reconhecimento
@@ -63,6 +66,7 @@ nmap 192.168.1.8
 O scan identificou algumas portas abertas, entre elas a porta `3306/tcp`, normalmente associada ao MySQL.
 
 ![Scan inicial com Nmap](images/04-nmap-inicial.png)
+
 <br>
 
 
@@ -80,6 +84,7 @@ nmap -sV -p 3306 192.168.1.8
 ```
 
 ![Identificação do MySQL com Nmap](images/05-nmap-mysql-antes.png)
+
 <br>
 
 
@@ -101,6 +106,7 @@ O resultado mostrou o MySQL escutando em:
 Isso indicava que o serviço estava escutando nas interfaces IPv4 disponíveis da máquina.
 
 ![Netstat antes do hardening](images/06-netstat-antes.png)
+
 <br>
 
 
@@ -136,6 +142,7 @@ Dessa vez, o MySQL passou a escutar em:
 ```
 
 ![Netstat depois do hardening](images/08-netstat-depois.png)
+
 <br>
 
 Por fim, repeti o scan a partir do Kali:
@@ -152,6 +159,7 @@ nmap -sV -p 3306 192.168.1.8
 ```
 
 ![Nmap depois do hardening](images/09-nmap-depois.png)
+
 <br>
 
 ## Antes e depois
@@ -161,6 +169,7 @@ nmap -sV -p 3306 192.168.1.8
 | `0.0.0.0:3306` | `127.0.0.1:3306` |
 | Nmap: `open` | Nmap: `filtered` |
 | Serviço acessível pela rede | Serviço restrito ao acesso local |
+
 <br>
 
 ## Aprendizados
