@@ -1,4 +1,4 @@
-# Hardening de MySQL com Kali Linux e Nmap
+# 🛡️ Hardening de MySQL com Kali Linux e Nmap
 <br>
 
 ## Sobre o projeto
@@ -8,7 +8,7 @@ Neste laboratório, analisei a exposição de um serviço MySQL executado em uma
 Durante o reconhecimento, identifiquei a porta `3306/tcp` acessível pela rede. Após investigar a configuração do serviço, apliquei uma medida de hardening para restringir o MySQL somente ao acesso local e validei a alteração com um novo scan.
 
 
-> Laboratório realizado em ambiente próprio e controlado.
+> ⚠️ Laboratório realizado em ambiente próprio e controlado.
 <br>
 
 ## Ambiente
@@ -110,7 +110,7 @@ Isso indicava que o serviço estava escutando nas interfaces IPv4 disponíveis d
 <br>
 
 
-## Hardening
+## 🔒 Hardening
 
 Como o MySQL era utilizado apenas localmente, alterei o arquivo `my.ini` para restringir o serviço ao endereço de loopback.
 <br>
@@ -173,6 +173,6 @@ nmap -sV -p 3306 192.168.1.8
 
 <br>
 
-## Aprendizados
+## 🌐 Aprendizados
 
 O laboratório permitiu praticar conceitos de redes, conectividade entre máquinas, reconhecimento com Nmap, análise de portas e serviços, validação com Netstat e aplicação de hardening para redução da superfície de exposição.
